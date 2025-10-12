@@ -11,11 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MainPageTest {
-    //- Переключение пицц в слайдере (стрелки влево/вправо) +++
-    //- Наведение на картинку напитка с проверкой отображения ссылки «В корзину» +++
-    //- Переход на страницу десерта при клике по его картинке ++-
-    //- Отображение ссылки-стрелочки «Наверх» в правом нижнем углу сайта при скроллинге в самый низ сайта ++-
-    //- Открытие ссылок на социальные сети из футера страницы в новой вкладке ++-
 
     WebDriver driver;
     MainPage mainPage;
@@ -77,9 +72,9 @@ public class MainPageTest {
     @Test
     void testGoToTheDessertPage(){
 
-        String expectedUrl = mainPage.getDesertLink();
+        String expectedUrl = mainPage.getDesertLink().replace("https://", "").replace("http://", "");
         mainPage.clickDessertImg();
-        String actualUrl = driver.getCurrentUrl();
+        String actualUrl = driver.getCurrentUrl().replace("https://", "").replace("http://", "");
         Assertions.assertEquals(expectedUrl, actualUrl, "URL страницы не соответствует ожидаемому");
     }
 
