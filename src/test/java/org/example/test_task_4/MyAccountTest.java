@@ -8,7 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class MyAccountTest {
-    //- Загрузка файла +--
 
     WebDriver driver;
     LoginPage loginPage;
