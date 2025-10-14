@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.DeliveryAndPayment;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -19,10 +20,12 @@ public class DeliveryAndPaymentTest {
         deliveryAndPayment = new DeliveryAndPayment(driver);
     }
 
+    @Description("Проверка минимальной суммы заказа (800 руб)")
     @Test
     void testMinimumOrderAmount(){
         deliveryAndPayment.switchToIframeDeliveryAndPayment();
-        Assertions.assertTrue(deliveryAndPayment.minOrderAmountIs800Rubles(), "Текст не содержит '800 рублей'");    }
+        Assertions.assertTrue(deliveryAndPayment.minOrderAmountIs800Rubles(), "Текст не содержит '800 рублей'");
+    }
 
     @AfterEach
     void tearDown(){

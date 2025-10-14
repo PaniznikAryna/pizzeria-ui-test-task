@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -20,6 +21,7 @@ public class DeliveryAndPayment {
     @FindBy(xpath = "//iframe")
     private WebElement iframeDeliveryAndPayment;
 
+    @Step("Переключаемся в iframe")
     public void switchToIframeDeliveryAndPayment() {
         driver.switchTo().frame(iframeDeliveryAndPayment);
     }
@@ -27,14 +29,11 @@ public class DeliveryAndPayment {
     @FindBy(xpath = "//li[contains(.,'Минимальная сумма заказа')]")
     private WebElement minOrderAmount;
 
+    @Step("Проверка того, что минимальная сумма заказа равно 800 рублей")
     public boolean minOrderAmountIs800Rubles() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(minOrderAmount));
 
         return minOrderAmount.getText().contains("800 рублей");
     }
-
-
-
-
 }
