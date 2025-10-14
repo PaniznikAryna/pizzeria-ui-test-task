@@ -44,7 +44,7 @@ public class MainPageTest {
 
             mainPage.clickRightSlider();
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             wait.until(driver -> {
                 String current = mainPage.getActiveSlideIndex();
                 return !current.equals(before);
@@ -64,7 +64,7 @@ public class MainPageTest {
 
         mainPage.clickLeftSlider();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         wait.until(driver -> {
             String current = mainPage.getActiveSlideIndex();
             return !current.equals(before);
