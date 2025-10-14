@@ -113,11 +113,10 @@ public class MainPage {
     @Step("Нажатие на ссылку социальных сетей")
     public void clickSocialMediaLinks(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("твой XPath")));
-        element.click();
-
+        wait.until(ExpectedConditions.elementToBeClickable(socialMediaLinks));
         socialMediaLinks.click();
     }
+
 
     @Step("Получение адреса социальной сети")
     public String getSocialMediaLinks(){
