@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.NavigationMenu;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,7 @@ public class NavigationMenuTest {
     }
 
     @Test
+    @Description("Переход c раздела Меню на секцию Пицца")
     void testSwitchingFromMenuToPizza(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickPizzaInMenuButton();
@@ -31,6 +33,7 @@ public class NavigationMenuTest {
     }
 
     @Test
+    @Description("Переход c раздела Меню на секцию Десерт")
     void testSwitchingFromMenuToDesserts(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickDesertInMenuButton();
@@ -41,6 +44,7 @@ public class NavigationMenuTest {
     }
 
     @Test
+    @Description("Переход c раздела Меню на секцию Напитки")
     void testSwitchingFromMenuToDrinks(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickDrinkInMenuButton();
