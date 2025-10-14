@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -25,18 +26,21 @@ public class MenuPage {
     @FindBy(xpath = "//a[@data-product_id='437']")
     private WebElement buttonDesert;
 
+    @Step("Добавление напитка в корзину")
     public void addDrinkToBasket() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonDrink));
         buttonDrink.click();
     }
 
+    @Step("Добавление десерта в корзину")
     public void addDesertToBasket() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(buttonDesert));
         buttonDesert.click();
     }
 
+    @Step("Переход на страницу Корзина")
     public void goToBasket() {
         By basketLocator = By.xpath("//a[@href='http://pizzeria.skillbox.cc/cart/']");
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

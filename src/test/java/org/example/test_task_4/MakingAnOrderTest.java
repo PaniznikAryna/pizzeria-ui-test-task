@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.BasketPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MakingAnOrder;
@@ -35,6 +36,7 @@ public class MakingAnOrderTest {
     }
 
     @Test
+    @Description("Установка даты заказа")
     void testSettingTheOrderDate() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/my-account/");
         loginPage.login("test1233314143", "testuser");
@@ -59,6 +61,7 @@ public class MakingAnOrderTest {
 
 
     @Test
+    @Description("Успешное оформление заказа с оплатой наличными")
     void testMakingTheOrderWithCashPayment() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/my-account/");
         loginPage.login("test1233314143", "testuser");
