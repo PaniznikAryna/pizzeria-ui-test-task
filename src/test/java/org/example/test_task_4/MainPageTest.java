@@ -145,7 +145,6 @@ public class MainPageTest {
         driver.switchTo().window(originalWindow);
     }
 
-
     @AfterEach
     void tearDown() {
         if (driver != null) {
