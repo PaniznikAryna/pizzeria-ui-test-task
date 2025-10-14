@@ -2,6 +2,8 @@ package org.example.test_task_4;
 
 import org.example.pages.MainPage;
 import org.junit.jupiter.api.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -82,6 +84,16 @@ public class MainPageTest {
     void testDisplayingTheUpArrowLink(){
         mainPage.scrollPage();
         Assertions.assertTrue(mainPage.displayupArrowLink(), "Отсутствует отображение ссылки-стрелочки «Наверх»");
+
+        Point location = mainPage.getUpArrowLocation();
+        int arrowX = location.getX();
+        int arrowY = location.getY();
+
+        Dimension windowSize = driver.manage().window().getSize();
+        int windowWidth = windowSize.getWidth();
+        int windowHeight = windowSize.getHeight();
+
+        Assertions.assertTrue(arrowX >= windowWidth - 150 && arrowY >= windowHeight - 150, "Стрелка 'Наверх' не находится в правом нижнем углу");
     }
 
     @Test

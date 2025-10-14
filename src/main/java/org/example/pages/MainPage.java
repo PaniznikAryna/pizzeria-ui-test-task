@@ -1,8 +1,6 @@
 package org.example.pages;
 
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -101,6 +99,14 @@ public class MainPage {
 
     public void scrollPage(){
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+    }
+
+    public Point getUpArrowLocation() {
+        return upArrowLink.getLocation();
+    }
+
+    public Dimension getWindowSize() {
+        return driver.manage().window().getSize();
     }
 
     @FindBy(xpath = "//a[@rel=\"noopener noreferrer\"]")
