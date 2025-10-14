@@ -30,17 +30,15 @@ public class BasketTest {
     }
 
     @Test
-    void testChangingCountOfItemsInBasket() throws InterruptedException {
+    void testChangingCountOfItemsInBasket(){
         int countBefore = basket.getItemCount();
 
         driver.get("https://pizzeria.skillbox.cc/product-category/menu/");
-        Thread.sleep(1000);
 
         menuPage.addDrinkToBasket();
         menuPage.addDesertToBasket();
         menuPage.goToBasket();
         driver.navigate().refresh();
-        Thread.sleep(2000);
 
         int countAfter = basket.getItemCount();
         Assertions.assertEquals(countBefore + 2, countAfter, "Количество товаров не увеличилось на 2");
@@ -48,6 +46,8 @@ public class BasketTest {
         countBefore = countAfter;
         basket.removeFirstItem();
         menuPage.goToBasket();
+        driver.navigate().refresh();
+
 
         countAfter = basket.getItemCount();
         Assertions.assertEquals(countBefore - 1, countAfter, "Количество товаров не уменьшилось на 1");
