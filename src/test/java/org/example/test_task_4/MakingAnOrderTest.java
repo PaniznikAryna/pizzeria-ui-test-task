@@ -101,7 +101,6 @@ public class MakingAnOrderTest {
 
         Assertions.assertTrue(successMessage.isDisplayed(), "Сообщение о получении заказа не найдено");
         Assertions.assertTrue(paymentInfo.isDisplayed(), "Информация об оплате наличными не найдена");
-
     }
 
     @AfterEach
