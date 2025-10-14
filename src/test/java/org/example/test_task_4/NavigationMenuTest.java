@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.example.pages.NavigationMenu;
+import org.example.utils.DriverFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,8 +21,9 @@ public class NavigationMenuTest {
 
     @BeforeEach
     void setUp(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        driver = new ChromeDriver(chromeOptions);
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        driver = new ChromeDriver(chromeOptions);
+        driver = DriverFactory.createChromeDriver();
         driver.get("https://pizzeria.skillbox.cc/");
         navigationMenu = new NavigationMenu(driver);
     }

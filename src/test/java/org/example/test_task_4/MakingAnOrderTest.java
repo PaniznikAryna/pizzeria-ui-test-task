@@ -8,6 +8,7 @@ import org.example.pages.BasketPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MakingAnOrder;
 import org.example.pages.MenuPage;
+import org.example.utils.DriverFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -32,8 +33,9 @@ public class MakingAnOrderTest {
 
     @BeforeEach
     void setUp(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        driver = new ChromeDriver(chromeOptions);
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        driver = new ChromeDriver(chromeOptions);
+        driver = DriverFactory.createChromeDriver();
         driver.get("https://pizzeria.skillbox.cc/checkout/");
         makingAnOrder = new MakingAnOrder(driver);
         loginPage = new LoginPage(driver);

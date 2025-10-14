@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.example.pages.MainPage;
+import org.example.utils.DriverFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
@@ -26,8 +27,9 @@ public class MainPageTest {
 
     @BeforeEach
    void setUp(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        driver = new ChromeDriver(chromeOptions);
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        driver = new ChromeDriver(chromeOptions);
+        driver = DriverFactory.createChromeDriver();
         driver.get("https://pizzeria.skillbox.cc/");
         mainPage = new MainPage(driver);
     }

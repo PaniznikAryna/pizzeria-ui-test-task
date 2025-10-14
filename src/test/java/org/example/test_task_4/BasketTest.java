@@ -8,6 +8,7 @@ import org.example.pages.BasketPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MenuPage;
 import org.example.pages.PromoPage;
+import org.example.utils.DriverFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,9 +28,9 @@ public class BasketTest {
 
     @BeforeEach
     void setUp(){
-        ChromeOptions chromeOptions = new ChromeOptions();
-        driver = new ChromeDriver(chromeOptions);
-        driver.get("https://pizzeria.skillbox.cc/cart/");
+//        ChromeOptions chromeOptions = new ChromeOptions();
+//        driver = new ChromeDriver(chromeOptions);
+        driver = DriverFactory.createChromeDriver();        driver.get("https://pizzeria.skillbox.cc/cart/");
         basket = new BasketPage(driver);
         menuPage = new MenuPage(driver);
         loginPage = new LoginPage(driver);
