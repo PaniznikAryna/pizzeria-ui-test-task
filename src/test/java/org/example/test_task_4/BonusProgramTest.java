@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.BonusProgram;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -25,6 +26,7 @@ public class BonusProgramTest {
     }
 
     @Test
+    @Description("Успешное оформление карты")
     void testMakingCard(){
         bonusProgram.FillingUserName();
         bonusProgram.FillingPhone();

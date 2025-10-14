@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.BasketPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MenuPage;
@@ -29,7 +30,9 @@ public class BasketTest {
         promoPage = new PromoPage(driver);
     }
 
+
     @Test
+    @Description("Изменение количества товаров (+/-)")
     void testChangingCountOfItemsInBasket(){
         int countBefore = basket.getItemCount();
 
@@ -55,6 +58,7 @@ public class BasketTest {
 
 
     @Test
+    @Description("Обновление суммы при изменении содержимого")
     void testUpdatingCostWhenTheContentChanges() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/product-category/menu/");
         menuPage.addDrinkToBasket();
@@ -72,6 +76,7 @@ public class BasketTest {
     }
 
     @Test
+    @Description("Переход к оплате (для авторизованного пользователя)")
     void testGoingToPaymentForTheAuthorizedUser() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/my-account/");
         loginPage.login("test1233314143", "testuser");
@@ -87,6 +92,7 @@ public class BasketTest {
     }
 
     @Test
+    @Description("Переход к оплате (для неавторизованного пользователя)")
     void testGoingToPaymentForTheUnauthorizedUser() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/product-category/menu/");
         menuPage.addDrinkToBasket();
@@ -99,6 +105,7 @@ public class BasketTest {
     }
 
     @Test
+    @Description("Применение промокода (из раздела \"Акции\")")
     void testUsingPromoCode() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/promo/");
         String coupon = promoPage.getPromotion();
@@ -121,6 +128,4 @@ public class BasketTest {
             driver.quit();
         }
     }
-
-
 }

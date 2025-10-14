@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -22,6 +23,7 @@ public class BasketPage {
     @FindBy(xpath = "//tr[@class='woocommerce-cart-form__cart-item cart_item']")
     private List<WebElement> cartItems;
 
+    @Step("Получение количества товаров")
     public int getItemCount() {
         return cartItems.size();
     }
@@ -29,6 +31,7 @@ public class BasketPage {
     @FindBy(xpath = "//a[@aria-label='Remove this item']")
     private List<WebElement> removeButtons;
 
+    @Step("Удаление первого элемента в корзине")
     public void removeFirstItem() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(removeButtons.get(0)));
@@ -40,6 +43,7 @@ public class BasketPage {
     private WebElement amountRaw;
 
 
+    @Step("Получение общей стоимости корзины")
     public float getAmount() throws InterruptedException {
         Thread.sleep(1000);
 
@@ -53,6 +57,7 @@ public class BasketPage {
     @FindBy(xpath = "//tr[contains(@class,'cart_item')]//input[contains(@name,'[qty]')]")
     private WebElement countItem;
 
+    @Step("Изменение количества продукта в корзине")
     public void changeCountItem() {
         countItem.clear();
         countItem.sendKeys("4");
@@ -61,10 +66,12 @@ public class BasketPage {
     @FindBy(xpath = ("//button[@name=\"update_cart\"]"))
     private WebElement buttonUpdateBasket;
 
+    @Step("Нажатие на кнопку \"Обновить корзину\"")
     public void clickButtonUpdateBasket(){
         buttonUpdateBasket.click();
     }
 
+    @Step("Нажатие на кнопку \"Перейти к оплате\"")
     public void clickButtonGoToPay() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement button = wait.until(ExpectedConditions.elementToBeClickable(
@@ -76,6 +83,7 @@ public class BasketPage {
     @FindBy(xpath = "//button[@id=\"place_order\"]")
     private WebElement buttonPlaceOrder;
 
+    @Step("Проверка появления кнопки \"Оформить заказ\"")
     public boolean isDisplayedButtonPlaceOrder(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(buttonPlaceOrder));
@@ -85,6 +93,7 @@ public class BasketPage {
     @FindBy(xpath = "//a[@class=\"showlogin\"]")
     private WebElement linkAuthorizedUser;
 
+    @Step("Проверка появления уведомления о необходимости авторизации")
     public boolean isDisplayedLinkAuthorizedUser(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(linkAuthorizedUser));
@@ -97,6 +106,7 @@ public class BasketPage {
     @FindBy(xpath = "//button[@value=\"Применить купон\"]")
     private WebElement buttonApplyCoupon;
 
+    @Step("Применение купона")
     public void applyCoupon(String couponCode){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("coupon_code")));
@@ -104,6 +114,7 @@ public class BasketPage {
         buttonApplyCoupon.click();
     }
 
+    @Step("Проверка появления уведомления о успешном применении купона")
     public boolean isCouponAppliedMessageVisible() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(
