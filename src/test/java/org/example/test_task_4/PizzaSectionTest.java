@@ -1,6 +1,9 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.PizzaSection;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +12,9 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.util.List;
 
+@Epic("Секция пицц")
+@Feature("Функциональность страницы пицц")
+@DisplayName("Тесты для секции с пиццами")
 public class PizzaSectionTest {
 
     WebDriver driver;
@@ -23,7 +29,9 @@ public class PizzaSectionTest {
     }
 
     @Test
-    @Description("Применение сортировки пицц")
+    @Story("Сортировка пицц")
+    @DisplayName("Применение сортировки пицц")
+    @Description("Проверяет, что после сортировки по цене, список цен отображается в порядке возрастания")
     void testPizzaSorting() {
         pizzaSection.sortBy("price");
         List<Integer> prices = pizzaSection.getPizzaPrices();
@@ -35,7 +43,9 @@ public class PizzaSectionTest {
     }
 
     @Test
-    @Description("Фильтрация по цене")
+    @Story("Фильтрация по цене")
+    @DisplayName("Проверка фильтрации пицц по диапазону цен")
+    @Description("Проверяет, что после применения фильтра по цене, все отображаемые пиццы находятся в заданном диапазоне")
     void testFilteringByPrice(){
         pizzaSection.filterByPrice(30, -40);
 
@@ -48,7 +58,9 @@ public class PizzaSectionTest {
     }
 
     @Test
-    @Description("Добавление пиццы в корзину")
+    @Story("Добавление пиццы в корзину")
+    @DisplayName("Проверка добавления пиццы '4 в 1' в корзину")
+    @Description("Проверяет, что при нажатии на кнопку 'В корзину' и переходе к деталям, отображается правильное название пиццы")
     void testAddingPizzaToTheBasket() {
         pizzaSection.clickButtonInBasket();
         pizzaSection.clickButtonMoreDetails();

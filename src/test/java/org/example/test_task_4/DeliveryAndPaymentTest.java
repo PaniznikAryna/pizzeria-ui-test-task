@@ -1,12 +1,18 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.DeliveryAndPayment;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+@Epic("Доставка и оплата")
+@Feature("Страница Доставка и оплата")
+@DisplayName("Тест для страницы доставки и оплаты")
 public class DeliveryAndPaymentTest {
 
     WebDriver driver;
@@ -20,8 +26,10 @@ public class DeliveryAndPaymentTest {
         deliveryAndPayment = new DeliveryAndPayment(driver);
     }
 
-    @Description("Проверка минимальной суммы заказа (800 руб)")
     @Test
+    @Story("Минимальная сумма заказа")
+    @DisplayName("Проверка минимальной суммы заказа — 800 рублей")
+    @Description("Проверяет, что на странице доставки указана минимальная сумма заказа в размере 800 рублей")
     void testMinimumOrderAmount(){
         deliveryAndPayment.switchToIframeDeliveryAndPayment();
         Assertions.assertTrue(deliveryAndPayment.minOrderAmountIs800Rubles(), "Текст не содержит '800 рублей'");

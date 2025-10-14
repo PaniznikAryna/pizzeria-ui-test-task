@@ -1,6 +1,9 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.LoginPage;
 import org.example.pages.MyAccount;
 import org.junit.jupiter.api.*;
@@ -8,6 +11,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+@Epic("Мой аккаунт")
+@Feature("Загрузка изображения")
+@DisplayName("Тест для страницы Мой аккаунт")
 public class MyAccountTest {
 
     WebDriver driver;
@@ -24,7 +30,9 @@ public class MyAccountTest {
     }
 
     @Test
-    @Description("Загрузка файла")
+    @Story("Загрузка файла")
+    @DisplayName("Проверка загрузки файла в разделе редактирования аккаунта")
+    @Description("Авторизация пользователя, переход в раздел редактирования и загрузка файла")
     void testUploadingFile(){
         loginPage.login("test1233314143", "testuser");
 

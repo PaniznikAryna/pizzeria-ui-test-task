@@ -1,12 +1,18 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.NavigationMenu;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+@Epic("Главная страница")
+@Feature("Навигационное меню")
+@DisplayName("Тесты навигации по разделам меню")
 public class NavigationMenuTest {
 
     WebDriver driver;
@@ -21,7 +27,9 @@ public class NavigationMenuTest {
     }
 
     @Test
-    @Description("Переход c раздела Меню на секцию Пицца")
+    @Story("Переход в секцию Пицца")
+    @DisplayName("Переход из меню в секцию 'Пицца'")
+    @Description("Проверяет, что при выборе пункта 'Пицца' из меню происходит переход на соответствующую страницу")
     void testSwitchingFromMenuToPizza(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickPizzaInMenuButton();
@@ -33,7 +41,9 @@ public class NavigationMenuTest {
     }
 
     @Test
-    @Description("Переход c раздела Меню на секцию Десерт")
+    @Story("Переход в секцию Десерт")
+    @DisplayName("Переход из меню в секцию 'Десерт'")
+    @Description("Проверяет, что при выборе пункта 'Десерт' из меню происходит переход на соответствующую страницу")
     void testSwitchingFromMenuToDesserts(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickDesertInMenuButton();
@@ -44,7 +54,9 @@ public class NavigationMenuTest {
     }
 
     @Test
-    @Description("Переход c раздела Меню на секцию Напитки")
+    @Story("Переход в секцию Напитки")
+    @DisplayName("Переход из меню в секцию 'Напитки'")
+    @Description("Проверяет, что при выборе пункта 'Напитки' из меню происходит переход на соответствующую страницу")
     void testSwitchingFromMenuToDrinks(){
         navigationMenu.moveToMenuButton();
         navigationMenu.clickDrinkInMenuButton();

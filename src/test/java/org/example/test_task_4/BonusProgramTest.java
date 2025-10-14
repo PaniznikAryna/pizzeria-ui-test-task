@@ -1,16 +1,18 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.BonusProgram;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-
+@Epic("Бонусная программа")
+@Feature("Оформление бонусной карты")
+@DisplayName("Тест для страницы бонусной программы")
 public class BonusProgramTest {
 
     WebDriver driver;
@@ -26,7 +28,9 @@ public class BonusProgramTest {
     }
 
     @Test
-    @Description("Успешное оформление карты")
+    @Story("Оформление карты")
+    @DisplayName("Успешное оформление бонусной карты")
+    @Description("Проверяет, что пользователь может успешно оформить бонусную карту, заполнив имя и телефон")
     void testMakingCard(){
         bonusProgram.FillingUserName();
         bonusProgram.FillingPhone();

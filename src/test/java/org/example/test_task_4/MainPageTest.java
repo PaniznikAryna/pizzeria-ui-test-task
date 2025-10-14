@@ -1,6 +1,9 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.MainPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Dimension;
@@ -13,6 +16,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+@Epic("Главная страница")
+@Feature("Главная страница с интерактивными элементами")
+@DisplayName("Тесты для главной страницы сайта")
 public class MainPageTest {
 
     WebDriver driver;
@@ -27,7 +33,9 @@ public class MainPageTest {
     }
 
     @Test
-    @Description("Переключение пицц в слайдере вправо")
+    @Story("Слайдер пицц")
+    @DisplayName("Переключение пицц в слайдере вправо")
+    @Description("Проверяет, что при нажатии на стрелку вправо слайдер переключается на следующий элемент")
     void testRightNavigationSliderButton(){
 
             String before = mainPage.getActiveSlideIndex();
@@ -45,7 +53,9 @@ public class MainPageTest {
     }
 
     @Test
-    @Description("Переключение пицц в слайдере влево")
+    @Story("Слайдер пицц")
+    @DisplayName("Переключение пицц в слайдере влево")
+    @Description("Проверяет, что при нажатии на стрелку влево слайдер переключается на предыдущий элемент")
     void testLeftNavigationSliderButton(){
 
         String before = mainPage.getActiveSlideIndex();
@@ -63,7 +73,9 @@ public class MainPageTest {
     }
 
     @Test
-    @Description("Наведение на картинку напитка с проверкой отображения ссылки «В корзину»")
+    @Story("Наведение на товар")
+    @DisplayName("Отображение кнопки 'В корзину' при наведении на напиток")
+    @Description("Проверяет, что при наведении на изображение напитка появляется кнопка 'В корзину'")
     void testDisplayingLinkToTheBasket() {
         mainPage.hoverDrinkSlider();
 
@@ -76,7 +88,9 @@ public class MainPageTest {
 
 
     @Test
-    @Description("Переход на страницу десерта при клике по его картинке")
+    @Story("Переход по изображению десерта")
+    @DisplayName("Переход на страницу десерта при клике по изображению")
+    @Description("Проверяет, что при клике на изображение десерта происходит переход на соответствующую страницу")
     void testGoToTheDessertPage(){
 
         String expectedUrl = mainPage.getDesertLink().replace("https://", "").replace("http://", "");
@@ -86,7 +100,9 @@ public class MainPageTest {
     }
 
     @Test
-    @Description("Отображение ссылки-стрелочки «Наверх» в правом нижнем углу сайта при скроллинге в самый низ сайта")
+    @Story("Скроллинг страницы")
+    @DisplayName("Отображение стрелки 'Наверх' при скроллинге")
+    @Description("Проверяет, что при прокрутке страницы вниз появляется стрелка 'Наверх' в правом нижнем углу")
     void testDisplayingTheUpArrowLink(){
         mainPage.scrollPage();
         Assertions.assertTrue(mainPage.displayUpArrowLink(), "Отсутствует отображение ссылки-стрелочки «Наверх»");
@@ -103,7 +119,9 @@ public class MainPageTest {
     }
 
     @Test
-    @Description("Открытие ссылок на социальные сети из футера страницы в новой вкладке")
+    @Story("Социальные сети")
+    @DisplayName("Открытие ссылок на соцсети в новой вкладке")
+    @Description("Проверяет, что при клике на иконку соцсети происходит переход в новую вкладку на соответствующую страницу")
     void testOpeningSocialMediaLinksInNewTab() {
         String expectedUrl = mainPage.getSocialMediaLinks();
         mainPage.clickSocialMediaLinks();

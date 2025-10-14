@@ -1,6 +1,9 @@
 package org.example.test_task_4;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.example.pages.BasketPage;
 import org.example.pages.LoginPage;
 import org.example.pages.MakingAnOrder;
@@ -17,6 +20,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.time.LocalDate;
 
+@Epic("Оформление заказа")
+@Feature("Страница Оформления заказа")
+@DisplayName("Тесты оформления заказа")
 public class MakingAnOrderTest {
     WebDriver driver;
     MakingAnOrder makingAnOrder;
@@ -36,7 +42,9 @@ public class MakingAnOrderTest {
     }
 
     @Test
-    @Description("Установка даты заказа")
+    @Story("Установка даты")
+    @DisplayName("Проверка установки даты доставки на завтра")
+    @Description("Авторизация, добавление товара в корзину, переход к оформлению и установка даты доставки")
     void testSettingTheOrderDate() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/my-account/");
         loginPage.login("test1233314143", "testuser");
@@ -61,7 +69,9 @@ public class MakingAnOrderTest {
 
 
     @Test
-    @Description("Успешное оформление заказа с оплатой наличными")
+    @Story("Оформление заказа с оплатой наличными")
+    @DisplayName("Проверка успешного оформления заказа с оплатой при доставке")
+    @Description("Авторизация, добавление товара, заполнение формы, выбор оплаты наличными и проверка успешного оформления")
     void testMakingTheOrderWithCashPayment() throws InterruptedException {
         driver.get("https://pizzeria.skillbox.cc/my-account/");
         loginPage.login("test1233314143", "testuser");
