@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,7 @@ public class MyAccount {
     @FindBy(xpath = "//li[@class=\"woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account\"]")
     private WebElement buttonDataAccount;
 
+    @Step("Нажатие на кнопку \"Данные аккаунта\"")
     public void clickButtonDataAccount(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         wait.until(ExpectedConditions.visibilityOf(buttonDataAccount));
@@ -32,6 +34,7 @@ public class MyAccount {
     @FindBy(xpath = "//input[@id=\"uploadFile\"]")
     private WebElement inputUploadFile;
 
+    @Step("Загрузка файла test.jpg")
     public void uploadFile() {
         URL resource = getClass().getClassLoader().getResource("test.jpg");
         if (resource == null) {

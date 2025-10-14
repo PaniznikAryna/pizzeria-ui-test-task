@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.LoginPage;
 import org.example.pages.MyAccount;
 import org.junit.jupiter.api.*;
@@ -23,6 +24,7 @@ public class MyAccountTest {
     }
 
     @Test
+    @Description("Загрузка файла")
     void testUploadingFile(){
         loginPage.login("test1233314143", "testuser");
 
