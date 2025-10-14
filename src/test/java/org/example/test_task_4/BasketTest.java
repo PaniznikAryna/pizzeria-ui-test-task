@@ -34,9 +34,13 @@ public class BasketTest {
         int countBefore = basket.getItemCount();
 
         driver.get("https://pizzeria.skillbox.cc/product-category/menu/");
+        Thread.sleep(1000);
+
         menuPage.addDrinkToBasket();
         menuPage.addDesertToBasket();
         menuPage.goToBasket();
+        driver.navigate().refresh();
+        Thread.sleep(2000);
 
         int countAfter = basket.getItemCount();
         Assertions.assertEquals(countBefore + 2, countAfter, "Количество товаров не увеличилось на 2");
