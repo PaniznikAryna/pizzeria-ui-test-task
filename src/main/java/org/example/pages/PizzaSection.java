@@ -1,5 +1,6 @@
 package org.example.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.*;
@@ -26,6 +27,7 @@ public class PizzaSection {
     @FindBy(xpath = "//ul[contains(@class,'products')]/li")
     private List<WebElement> pizzaItems;
 
+    @Step("Сортировка пицц")
     public void sortBy(String value) {
         Select select = new Select(sortDropdown);
         select.selectByValue(value);
@@ -33,6 +35,7 @@ public class PizzaSection {
         new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[contains(@class,'products')]/li")));
     }
 
+    @Step("Фильтрация пицц по стоимости: сдвиг правого и левого ползунка")
     public void filterByPrice(int leftOffset, int rightOffset) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -53,6 +56,7 @@ public class PizzaSection {
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("//ul[contains(@class,'products')]/li")));
     }
 
+    @Step("Получение списка цен на отображаемые пиццы")
     public List<Integer> getPizzaPrices() {
         return pizzaItems.stream().map(item -> Integer.parseInt(item.findElement(By.xpath(".//bdi")).getText().replaceAll("[^\\d]", "")) / 100).collect(Collectors.toList());
     }
@@ -60,6 +64,7 @@ public class PizzaSection {
     @FindBy(xpath = "//a[@data-product_id=\"425\"]")
     private WebElement buttonInBasket;
 
+    @Step("Нажатие на кнопку \"В корзину\"")
     public void clickButtonInBasket(){
         buttonInBasket.click();
     }
@@ -67,6 +72,7 @@ public class PizzaSection {
     @FindBy(xpath = "//a[@title=\"Подробнее\"]")
     private WebElement buttonMoreDetails;
 
+    @Step("Нажатие на кнопку \"Подробнее\"")
     public void clickButtonMoreDetails(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(buttonMoreDetails));
@@ -76,6 +82,7 @@ public class PizzaSection {
     @FindBy(xpath = "//td[@class='product-name']//a")
     private WebElement itemName;
 
+    @Step("Получение названия товара в корзине")
     public String getItemName() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOf(itemName));

@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.PizzaSection;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
@@ -22,6 +23,7 @@ public class PizzaSectionTest {
     }
 
     @Test
+    @Description("Применение сортировки пицц")
     void testPizzaSorting() {
         pizzaSection.sortBy("price");
         List<Integer> prices = pizzaSection.getPizzaPrices();
@@ -33,6 +35,7 @@ public class PizzaSectionTest {
     }
 
     @Test
+    @Description("Фильтрация по цене")
     void testFilteringByPrice(){
         pizzaSection.filterByPrice(30, -40);
 
@@ -45,6 +48,7 @@ public class PizzaSectionTest {
     }
 
     @Test
+    @Description("Добавление пиццы в корзину")
     void testAddingPizzaToTheBasket() {
         pizzaSection.clickButtonInBasket();
         pizzaSection.clickButtonMoreDetails();
