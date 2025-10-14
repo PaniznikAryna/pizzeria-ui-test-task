@@ -1,5 +1,6 @@
 package org.example.test_task_4;
 
+import io.qameta.allure.Description;
 import org.example.pages.MainPage;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Dimension;
@@ -26,6 +27,7 @@ public class MainPageTest {
     }
 
     @Test
+    @Description("Переключение пицц в слайдере вправо")
     void testRightNavigationSliderButton(){
 
             String before = mainPage.getActiveSlideIndex();
@@ -43,6 +45,7 @@ public class MainPageTest {
     }
 
     @Test
+    @Description("Переключение пицц в слайдере влево")
     void testLeftNavigationSliderButton(){
 
         String before = mainPage.getActiveSlideIndex();
@@ -60,6 +63,7 @@ public class MainPageTest {
     }
 
     @Test
+    @Description("Наведение на картинку напитка с проверкой отображения ссылки «В корзину»")
     void testDisplayingLinkToTheBasket() {
         mainPage.hoverDrinkSlider();
 
@@ -72,6 +76,7 @@ public class MainPageTest {
 
 
     @Test
+    @Description("Переход на страницу десерта при клике по его картинке")
     void testGoToTheDessertPage(){
 
         String expectedUrl = mainPage.getDesertLink().replace("https://", "").replace("http://", "");
@@ -81,9 +86,10 @@ public class MainPageTest {
     }
 
     @Test
+    @Description("Отображение ссылки-стрелочки «Наверх» в правом нижнем углу сайта при скроллинге в самый низ сайта")
     void testDisplayingTheUpArrowLink(){
         mainPage.scrollPage();
-        Assertions.assertTrue(mainPage.displayupArrowLink(), "Отсутствует отображение ссылки-стрелочки «Наверх»");
+        Assertions.assertTrue(mainPage.displayUpArrowLink(), "Отсутствует отображение ссылки-стрелочки «Наверх»");
 
         Point location = mainPage.getUpArrowLocation();
         int arrowX = location.getX();
@@ -97,6 +103,7 @@ public class MainPageTest {
     }
 
     @Test
+    @Description("Открытие ссылок на социальные сети из футера страницы в новой вкладке")
     void testOpeningSocialMediaLinksInNewTab() {
         String expectedUrl = mainPage.getSocialMediaLinks();
         mainPage.clickSocialMediaLinks();
