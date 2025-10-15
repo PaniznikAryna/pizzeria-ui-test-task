@@ -25,26 +25,8 @@ jobs:
           sudo apt-get update
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
-
-      - name: Remove preinstalled ChromeDriver
-        run: sudo rm -f /usr/bin/chromedriver
-
-      - name: Install matching ChromeDriver
-        run: |
-          set -e
-          CHROME_VER=$(google-chrome --version | sed -E 's/.* ([0-9]+)\..*/\1/')
-          DRIVER_VER=$(wget -qO- "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VER}")
-          wget -N "https://chromedriver.storage.googleapis.com/${DRIVER_VER}/chromedriver_linux64.zip"
-          unzip -o chromedriver_linux64.zip -d chromedriver_temp
-          sudo mv chromedriver_temp/chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-          chromedriver --version
-
       - name: Run tests
         run: mvn clean test
-
-      - name: "Debug: Check Allure Results"
-        run: ls -la target/allure-results
 
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
@@ -52,18 +34,14 @@ jobs:
           name: allure-results
           path: target/allure-results
 
-      - name: Install Allure CLI
-        run: |
-          sudo apt-add-repository ppa:qameta/allure -y
-          sudo apt-get update
-          sudo apt-get install allure -y
+      - name: Generate Allure Report
+        run: mvn allure:report
 
-      - name: Generate Allure Report (CLI)
-        run: |
-          allure generate target/allure-results --clean -o target/allure-report
+      - name: List Allure Results
+        run: ls -la target/allure-results
 
-      - name: Upload Allure Report
+      - name: Upload Allure Report as artifact
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/allure-report
+          path: target/site/allure-maven-plugin
