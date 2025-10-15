@@ -25,8 +25,12 @@ jobs:
           sudo apt-get update
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install ./google-chrome-stable_current_amd64.deb
+
       - name: Run tests
         run: mvn clean test
+
+      - name:Debug: Check Allure Results
+        run: ls -la target/allure-results
 
       - name: Upload Allure Results
         uses: actions/upload-artifact@v4
@@ -34,14 +38,18 @@ jobs:
           name: allure-results
           path: target/allure-results
 
-      - name: Generate Allure Report
-        run: mvn allure:report
+      - name: Install Allure CLI
+        run: |
+          sudo apt-add-repository ppa:qameta/allure -y
+          sudo apt-get update
+          sudo apt-get install allure -y
 
-      - name: List Allure Results
-        run: ls -la target/allure-results
+      - name: Generate Allure Report (CLI)
+        run: |
+          allure generate target/allure-results --clean -o target/allure-report
 
-      - name: Upload Allure Report as artifact
+      - name: Upload Allure Report
         uses: actions/upload-artifact@v4
         with:
           name: allure-report
-          path: target/site/allure-maven-plugin
+          path: target/allure-report
