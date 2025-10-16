@@ -1,4 +1,4 @@
-name: Run Tests and Publish Allure Report
+name: Run Tests and Deploy Allure Report to Netlify
 
 on:
   push:
@@ -6,13 +6,18 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  contents: write
+
 jobs:
-  test:
+  test-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK
         uses: actions/setup-java@v3
@@ -20,11 +25,11 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: Install Chrome 139
+      - name: Install Chrome
         run: |
           sudo apt-get update
-          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-          sudo apt install ./google-chrome-stable_current_amd64.deb
+          wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
       - name: Run tests
         run: mvn clean test
@@ -38,3 +43,23 @@ jobs:
           gh_pages: gh-pages
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Node.js (для Netlify CLI)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Netlify CLI
+        run: npm install -g netlify-cli
+
+      - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        run: |
+          netlify deploy \
+            --prod \
+            --dir=allure-report \
+            --site=${{ secrets.NETLIFY_SITE_ID }}
+
+      - name: Show Netlify Deploy URL
+        run: echo "Отчёт задеплоен на Netlifyт"
