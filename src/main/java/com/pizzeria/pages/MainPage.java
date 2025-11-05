@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +11,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MainPage {
+    public static final String RIGHT_NAVIGATION_BUTTON_XPATH = "//a[@aria-label=\"next\"]";
+    public static final String LEFT_NAVIGATION_BUTTON_XPATH = "//a[@aria-label=\"previous\"]";
+    public static final String ACTIVE_SLIDE_XPATH = "//*[contains(@class, 'slick-slide') and contains(@class, 'slick-active')]";
+    public static final String HOVER_BUTTON_IN_BASKET_XPATH = "//a[@data-product_id=\"431\"]";
+    public static final String DRINK_SLIDER_ELEMENT_XPATH = "//img[@src=\"http://pizzeria.skillbox.cc/wp-content/uploads/2021/10/pexels-chevanon-photography-312418-300x300.jpg\"]";
+    public static final String DESERT_SLIDE_ELEMENT_XPATH = "//img[@src=\"http://pizzeria.skillbox.cc/wp-content/uploads/2021/10/pexels-geraud-pfeiffer-6607296-300x300.jpg\"]";
+    public static final String LINK_DESERT_XPATH = "//a[@title=\"Десерт «Булочка с корицей»\"]";
+    public static final String UP_ARROW_LINK_XPATH = "//div[@id=\"ak-top\"]";
+    public static final String SOCIAL_MEDIA_LINKS_XPATH = "//a[@rel=\"noopener noreferrer\"]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(30);
 
@@ -20,7 +29,7 @@ public class MainPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.RIGHT_NAVIGATION_BUTTON_XPATH)
+    @FindBy(xpath = RIGHT_NAVIGATION_BUTTON_XPATH)
     private WebElement rightNavigationButton;
 
     @Step("Нажатие на правую кнопку слайдера")
@@ -30,7 +39,7 @@ public class MainPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.LEFT_NAVIGATION_BUTTON_XPATH)
+    @FindBy(xpath = LEFT_NAVIGATION_BUTTON_XPATH)
     private WebElement leftNavigationButton;
 
     @Step("Нажатие на левую кнопку слайдера")
@@ -40,7 +49,7 @@ public class MainPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.ACTIVE_SLIDE_XPATH)
+    @FindBy(xpath = ACTIVE_SLIDE_XPATH)
     private WebElement activeSlide;
 
     @Step("Получение индекса активного элемента слайдера")
@@ -48,7 +57,7 @@ public class MainPage {
         return activeSlide.getAttribute("data-slick-index");
     }
 
-    @FindBy(xpath = Constant.HOVER_BUTTON_IN_BASKET_XPATH)
+    @FindBy(xpath = HOVER_BUTTON_IN_BASKET_XPATH)
     private WebElement hoverButtonInBasket;
 
     @Step("Проверка отображения кнопки \"В корзину\"")
@@ -61,7 +70,7 @@ public class MainPage {
         return hoverButtonInBasket;
     }
 
-    @FindBy(xpath = Constant.DRINK_SLIDER_ELEMENT_XPATH)
+    @FindBy(xpath = DRINK_SLIDER_ELEMENT_XPATH)
     private WebElement drinkSliderElement;
 
     @Step("Наведение курсора на элемент слайдера с напитками")
@@ -79,7 +88,7 @@ public class MainPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.DESERT_SLIDE_ELEMENT_XPATH)
+    @FindBy(xpath = DESERT_SLIDE_ELEMENT_XPATH)
     private WebElement desertSlideElement;
 
     @Step("Нажатие на элемент слайдера с десертами")
@@ -89,7 +98,7 @@ public class MainPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.LINK_DESERT_XPATH)
+    @FindBy(xpath = LINK_DESERT_XPATH)
     private WebElement linkDesert;
 
     @Step("Получение ссылки на десерт")
@@ -97,7 +106,7 @@ public class MainPage {
         return linkDesert.getAttribute("href");
     }
 
-    @FindBy(xpath = Constant.UP_ARROW_LINK_XPATH)
+    @FindBy(xpath = UP_ARROW_LINK_XPATH)
     private WebElement upArrowLink;
 
     @Step("Проверка отображения кнопки \"Наверх\"")
@@ -121,7 +130,7 @@ public class MainPage {
         return driver.manage().window().getSize();
     }
 
-    @FindBy(xpath = Constant.SOCIAL_MEDIA_LINKS_XPATH)
+    @FindBy(xpath = SOCIAL_MEDIA_LINKS_XPATH)
     private WebElement socialMediaLinks;
 
     @Step("Нажатие на ссылку социальных сетей")

@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +13,18 @@ import java.time.Duration;
 import java.util.List;
 
 public class BasketPage {
+    public static final String CART_ITEMS_XPATH = "//tr[@class='woocommerce-cart-form__cart-item cart_item']";
+    public static final String REMOVE_BUTTONS_XPATH = "//a[@aria-label='Remove this item']";
+    public static final String AMOUNT_RAW_XPATH = "//td[@data-title='Сумма']//bdi";
+    public static final String COUNT_ITEM_XPATH = "//tr[contains(@class,'cart_item')]//input[contains(@name,'[qty]')]";
+    public static final String BUTTON_UPDATE_BASKET_XPATH = "//button[@name='update_cart']";
+    public static final String CHECKOUT_BUTTON_XPATH = "//a[contains(@href,'/checkout/')]"; // used for "Перейти к оплате"
+    public static final String PLACE_ORDER_BUTTON_XPATH_BASKET = "//button[@id='place_order']";
+    public static final String LINK_SHOWLOGIN_XPATH = "//a[@class='showlogin']";
+    public static final String COUPON_CODE_ID = "coupon_code";
+    public static final String BUTTON_APPLY_COUPON_XPATH = "//button[@value='Применить купон']";
+    public static final String COUPON_APPLIED_MESSAGE_CSS = "div.woocommerce-message[role='alert']";
+
     private final WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(30);
 
@@ -22,7 +33,7 @@ public class BasketPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.CART_ITEMS_XPATH)
+    @FindBy(xpath = CART_ITEMS_XPATH)
     private List<WebElement> cartItems;
 
     @Step("Получение количества товаров")
@@ -30,7 +41,7 @@ public class BasketPage {
         return cartItems.size();
     }
 
-    @FindBy(xpath = Constant.REMOVE_BUTTONS_XPATH)
+    @FindBy(xpath = REMOVE_BUTTONS_XPATH)
     private List<WebElement> removeButtons;
 
     @Step("Удаление первого элемента в корзине")
@@ -41,7 +52,7 @@ public class BasketPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.AMOUNT_RAW_XPATH)
+    @FindBy(xpath = AMOUNT_RAW_XPATH)
     private WebElement amountRaw;
 
     @Step("Получение общей стоимости корзины")
@@ -54,7 +65,7 @@ public class BasketPage {
         return Float.parseFloat(cleanRaw);
     }
 
-    @FindBy(xpath = Constant.COUNT_ITEM_XPATH)
+    @FindBy(xpath = COUNT_ITEM_XPATH)
     private WebElement countItem;
 
     @Step("Изменение количества продукта в корзине")
@@ -64,7 +75,7 @@ public class BasketPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.BUTTON_UPDATE_BASKET_XPATH)
+    @FindBy(xpath = BUTTON_UPDATE_BASKET_XPATH)
     private WebElement buttonUpdateBasket;
 
     @Step("Нажатие на кнопку \"Обновить корзину\"")
@@ -76,12 +87,12 @@ public class BasketPage {
     @Step("Нажатие на кнопку \"Перейти к оплате\"")
     public BasketPage clickButtonGoToPay() {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(Constant.CHECKOUT_BUTTON_XPATH)));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CHECKOUT_BUTTON_XPATH)));
         button.click();
         return this;
     }
 
-    @FindBy(xpath = Constant.PLACE_ORDER_BUTTON_XPATH_BASKET)
+    @FindBy(xpath = PLACE_ORDER_BUTTON_XPATH_BASKET)
     private WebElement buttonPlaceOrder;
 
     @Step("Проверка появления кнопки \"Оформить заказ\"")
@@ -91,7 +102,7 @@ public class BasketPage {
         return buttonPlaceOrder.isDisplayed();
     }
 
-    @FindBy(xpath = Constant.LINK_SHOWLOGIN_XPATH)
+    @FindBy(xpath = LINK_SHOWLOGIN_XPATH)
     private WebElement linkAuthorizedUser;
 
     @Step("Проверка появления уведомления о необходимости авторизации")
@@ -101,16 +112,16 @@ public class BasketPage {
         return linkAuthorizedUser.isDisplayed();
     }
 
-    @FindBy(id = Constant.COUPON_CODE_ID)
+    @FindBy(id = COUPON_CODE_ID)
     private WebElement getCoupon;
 
-    @FindBy(xpath = Constant.BUTTON_APPLY_COUPON_XPATH)
+    @FindBy(xpath = BUTTON_APPLY_COUPON_XPATH)
     private WebElement buttonApplyCoupon;
 
     @Step("Применение купона")
     public BasketPage applyCoupon(String couponCode) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(Constant.COUPON_CODE_ID)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id(COUPON_CODE_ID)));
         getCoupon.sendKeys(couponCode);
         buttonApplyCoupon.click();
         return this;
@@ -119,7 +130,7 @@ public class BasketPage {
     @Step("Проверка появления уведомления о успешном применении купона")
     public boolean isCouponAppliedMessageVisible() {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constant.COUPON_APPLIED_MESSAGE_CSS)));
+        WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(COUPON_APPLIED_MESSAGE_CSS)));
         return message.getText().contains("Coupon code applied successfully");
     }
 }

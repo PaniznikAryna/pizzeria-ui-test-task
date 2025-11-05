@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +14,9 @@ import java.net.URL;
 import java.time.Duration;
 
 public class MyAccountPage {
+    public static final String BUTTON_DATA_ACCOUNT_XPATH = "//li[@class=\"woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--edit-account\"]";
+    public static final String INPUT_UPLOAD_FILE_XPATH = "//input[@id=\"uploadFile\"]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(20);
 
@@ -23,7 +25,7 @@ public class MyAccountPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.BUTTON_DATA_ACCOUNT_XPATH)
+    @FindBy(xpath = BUTTON_DATA_ACCOUNT_XPATH)
     private WebElement buttonDataAccount;
 
     @Step("Нажатие на кнопку \"Данные аккаунта\"")
@@ -34,7 +36,7 @@ public class MyAccountPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.INPUT_UPLOAD_FILE_XPATH)
+    @FindBy(xpath = INPUT_UPLOAD_FILE_XPATH)
     private WebElement inputUploadFile;
 
     @Step("Загрузка файла test.jpg")

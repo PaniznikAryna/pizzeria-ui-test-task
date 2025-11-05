@@ -1,5 +1,6 @@
 package com.pizzeria.pages;
 
+
 import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
@@ -11,6 +12,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MakingAnOrderPage {
+    public static final String CHECKOUT_LINK_XPATH = "//a[contains(@href,'/checkout/')]";
+    public static final String DATE_INPUT_XPATH = "//input[@type='date']";
+
+    public static final String BILLING_FIRST_NAME_XPATH = "//input[@id='billing_first_name']";
+    public static final String BILLING_LAST_NAME_XPATH = "//input[@id='billing_last_name']";
+    public static final String BILLING_ADDRESS_1_XPATH = "//input[@id='billing_address_1']";
+    public static final String BILLING_CITY_XPATH = "//input[@id='billing_city']";
+    public static final String BILLING_STATE_XPATH = "//input[@id='billing_state']";
+    public static final String BILLING_POSTCODE_XPATH = "//input[@id='billing_postcode']";
+    public static final String BILLING_PHONE_XPATH = "//input[@id='billing_phone']";
+    public static final String BILLING_EMAIL_XPATH = "//input[@id='billing_email']";
+
+    public static final String COUNTRY_DROPDOWN_CSS = ".select2-selection--single";
+    public static final String COUNTRY_SEARCH_INPUT_CSS = "input.select2-search__field";
+    public static final String COUNTRY_RESULT_XPATH_TEMPLATE = "//li[contains(@class,'select2-results__option') and normalize-space(text())='%s']";
+
+    public static final String PAYMENT_METHOD_CASH_XPATH = "//input[@id='payment_method_cod']";
+    public static final String TERMS_CHECKBOX_XPATH = "//input[@id='terms']";
+    public static final String PLACE_ORDER_BUTTON_XPATH = "//button[@id='place_order']";
+
     private final WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(10);
 
@@ -21,7 +42,7 @@ public class MakingAnOrderPage {
 
     @Step("Переход на страницу оформления заказа")
     public MakingAnOrderPage goToMakingAnOrder() {
-        By basketLocator = By.xpath(Constant.CHECKOUT_LINK_XPATH);
+        By basketLocator = By.xpath(CHECKOUT_LINK_XPATH);
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
 
         try {
@@ -35,7 +56,7 @@ public class MakingAnOrderPage {
     @Step("Установка даты")
     public MakingAnOrderPage setDate(String date) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Constant.DATE_INPUT_XPATH)));
+        WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(DATE_INPUT_XPATH)));
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].value = arguments[1]; arguments[0].dispatchEvent(new Event('change'))", dateInput, date);
@@ -45,32 +66,32 @@ public class MakingAnOrderPage {
     @Step("Получение даты")
     public String getDate() {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Constant.DATE_INPUT_XPATH)));
+        WebElement dateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(DATE_INPUT_XPATH)));
         return dateInput.getAttribute("value");
     }
 
-    @FindBy(xpath = Constant.BILLING_FIRST_NAME_XPATH)
+    @FindBy(xpath = BILLING_FIRST_NAME_XPATH)
     private WebElement inputFirstName;
 
-    @FindBy(xpath = Constant.BILLING_LAST_NAME_XPATH)
+    @FindBy(xpath = BILLING_LAST_NAME_XPATH)
     private WebElement inputLastName;
 
-    @FindBy(xpath = Constant.BILLING_ADDRESS_1_XPATH)
+    @FindBy(xpath = BILLING_ADDRESS_1_XPATH)
     private WebElement inputAddress;
 
-    @FindBy(xpath = Constant.BILLING_CITY_XPATH)
+    @FindBy(xpath = BILLING_CITY_XPATH)
     private WebElement inputCity;
 
-    @FindBy(xpath = Constant.BILLING_STATE_XPATH)
+    @FindBy(xpath = BILLING_STATE_XPATH)
     private WebElement inputState;
 
-    @FindBy(xpath = Constant.BILLING_POSTCODE_XPATH)
+    @FindBy(xpath = BILLING_POSTCODE_XPATH)
     private WebElement inputPostcode;
 
-    @FindBy(xpath = Constant.BILLING_PHONE_XPATH)
+    @FindBy(xpath = BILLING_PHONE_XPATH)
     private WebElement inputPhone;
 
-    @FindBy(xpath = Constant.BILLING_EMAIL_XPATH)
+    @FindBy(xpath = BILLING_EMAIL_XPATH)
     private WebElement inputEmail;
 
     @Step("Заполнение формы заказа")
@@ -102,21 +123,21 @@ public class MakingAnOrderPage {
         inputEmail.clear();
         inputEmail.sendKeys(Constant.EMAIL);
 
-        WebElement countryDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(Constant.COUNTRY_DROPDOWN_CSS)));
+        WebElement countryDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(COUNTRY_DROPDOWN_CSS)));
         countryDropdown.click();
 
-        WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(Constant.COUNTRY_SEARCH_INPUT_CSS)));
+        WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(COUNTRY_SEARCH_INPUT_CSS)));
         searchInput.clear();
         searchInput.sendKeys(Constant.COUNTRY);
 
-        String countryResultXpath = String.format(Constant.COUNTRY_RESULT_XPATH_TEMPLATE, Constant.COUNTRY);
+        String countryResultXpath = String.format(COUNTRY_RESULT_XPATH_TEMPLATE, Constant.COUNTRY);
         WebElement result = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(countryResultXpath)));
         result.click();
 
         return this;
     }
 
-    @FindBy(xpath = Constant.PAYMENT_METHOD_CASH_XPATH)
+    @FindBy(xpath = PAYMENT_METHOD_CASH_XPATH)
     private WebElement radioPaymentOnDelivery;
 
     @Step("Выбор способа оплаты: оплата при доставке")
@@ -129,7 +150,7 @@ public class MakingAnOrderPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.TERMS_CHECKBOX_XPATH)
+    @FindBy(xpath = TERMS_CHECKBOX_XPATH)
     private WebElement checkboxTerms;
 
     @Step("Согласие с условиями использования сайта")
@@ -142,7 +163,7 @@ public class MakingAnOrderPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.PLACE_ORDER_BUTTON_XPATH)
+    @FindBy(xpath = PLACE_ORDER_BUTTON_XPATH)
     private WebElement buttonMakingAnOrder;
 
     @Step("Нажатие на кнопку \"Оформить заказ\"")

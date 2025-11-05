@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class DeliveryAndPaymentPage {
+    public static final String IFRAME_DELIVERY_AND_PAYMENT_XPATH = "//iframe";
+    public static final String MIN_ORDER_AMOUNT_XPATH = "//li[contains(.,'Минимальная сумма заказа')]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(30);
 
@@ -20,7 +22,7 @@ public class DeliveryAndPaymentPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.IFRAME_DELIVERY_AND_PAYMENT_XPATH)
+    @FindBy(xpath = IFRAME_DELIVERY_AND_PAYMENT_XPATH)
     private WebElement iframeDeliveryAndPayment;
 
     @Step("Переключаемся в iframe")
@@ -29,7 +31,7 @@ public class DeliveryAndPaymentPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.MIN_ORDER_AMOUNT_XPATH)
+    @FindBy(xpath = MIN_ORDER_AMOUNT_XPATH)
     private WebElement minOrderAmount;
 
     @Step("Проверка того, что минимальная сумма заказа равно 800 рублей")

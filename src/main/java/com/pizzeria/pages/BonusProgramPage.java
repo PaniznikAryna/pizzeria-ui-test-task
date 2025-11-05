@@ -12,6 +12,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BonusProgramPage {
+    public static final String BONUS_USER_NAME_XPATH = "//input[@id=\"bonus_username\"]";
+    public static final String BONUS_PHONE_XPATH = "//input[@id=\"bonus_phone\"]";
+    public static final String BUTTON_ISSUE_CARD_XPATH = "//button[@class=\"woocommerce-Button woocommerce-button button woocommerce-form-register__submit\"]";
+    public static final String CARD_HAS_BEEN_ISSUED_XPATH = "//h3[starts-with(text(),'Ваша карта оформлена!')]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(30);
 
@@ -20,7 +25,7 @@ public class BonusProgramPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.BONUS_USER_NAME_XPATH)
+    @FindBy(xpath = BONUS_USER_NAME_XPATH)
     private WebElement bonusUserName;
 
     @Step("Заполнение поля \"Имя\"")
@@ -29,7 +34,7 @@ public class BonusProgramPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.BONUS_PHONE_XPATH)
+    @FindBy(xpath = BONUS_PHONE_XPATH)
     private WebElement bonusPhone;
 
     @Step("Заполнение поля \"Телефон\"")
@@ -38,7 +43,7 @@ public class BonusProgramPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.BUTTON_ISSUE_CARD_XPATH)
+    @FindBy(xpath = BUTTON_ISSUE_CARD_XPATH)
     private WebElement buttonIssueCard;
 
     @Step("Отправить данные для оформления карты")
@@ -53,7 +58,7 @@ public class BonusProgramPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.CARD_HAS_BEEN_ISSUED_XPATH)
+    @FindBy(xpath = CARD_HAS_BEEN_ISSUED_XPATH)
     private WebElement cardHasBeenIssued;
 
     @Step("Проверка успешно ли оформлена карта")

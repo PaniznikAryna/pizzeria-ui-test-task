@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -11,6 +10,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class MenuPage {
+    public static final String BUTTON_DRINK_XPATH = "//a[@data-product_id='427']";
+    public static final String BUTTON_DESERT_XPATH = "//a[@data-product_id='437']";
+    public static final String BASKET_LINK_XPATH = "//a[contains(@href,'/cart')]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(10);
 
@@ -19,10 +22,10 @@ public class MenuPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.BUTTON_DRINK_XPATH)
+    @FindBy(xpath = BUTTON_DRINK_XPATH)
     private WebElement buttonDrink;
 
-    @FindBy(xpath = Constant.BUTTON_DESERT_XPATH)
+    @FindBy(xpath = BUTTON_DESERT_XPATH)
     private WebElement buttonDesert;
 
     @Step("Добавление напитка в корзину")
@@ -43,7 +46,7 @@ public class MenuPage {
     @Step("Переход на страницу Корзина")
     public MenuPage goToBasket() {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        By basketLocator = By.xpath(Constant.BASKET_LINK_XPATH);
+        By basketLocator = By.xpath(BASKET_LINK_XPATH);
 
         try {
             wait.until(ExpectedConditions.elementToBeClickable(basketLocator)).click();

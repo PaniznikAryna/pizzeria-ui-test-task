@@ -1,6 +1,5 @@
 package com.pizzeria.pages;
 
-import com.pizzeria.utils.Constant;
 import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +11,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PizzaPage {
+    public static final String SORT_DROPDOWN_XPATH = "//select[@name='orderby']";
+    public static final String FILTER_BUTTON_XPATH = "//button[text()='Применить']";
+    public static final String PIZZA_ITEMS_XPATH = "//ul[contains(@class,'products')]/li";
+    public static final String BUTTON_IN_BASKET_XPATH = "//a[@data-product_id=\"425\"]";
+    public static final String BUTTON_MORE_DETAILS_XPATH = "//a[@title=\"Подробнее\"]";
+    public static final String ITEM_NAME_XPATH = "//td[@class='product-name']//a";
+    public static final String PRODUCT_LIST_XPATH = "//ul[contains(@class,'products')]/li";
+    public static final String PRICE_SLIDER_WRAPPER_XPATH = "//div[contains(@class,'price_slider_wrapper')]";
+    public static final String LEFT_PRICE_HANDLE_XPATH = "(//span[contains(@class,'ui-slider-handle')])[1]";
+    public static final String RIGHT_PRICE_HANDLE_XPATH = "(//span[contains(@class,'ui-slider-handle')])[2]";
+
     private WebDriver driver;
     private final Duration WAIT = Duration.ofSeconds(10);
 
@@ -20,13 +30,13 @@ public class PizzaPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = Constant.SORT_DROPDOWN_XPATH)
+    @FindBy(xpath = SORT_DROPDOWN_XPATH)
     private WebElement sortDropdown;
 
-    @FindBy(xpath = Constant.FILTER_BUTTON_XPATH)
+    @FindBy(xpath = FILTER_BUTTON_XPATH)
     private WebElement filterButton;
 
-    @FindBy(xpath = Constant.PIZZA_ITEMS_XPATH)
+    @FindBy(xpath = PIZZA_ITEMS_XPATH)
     private List<WebElement> pizzaItems;
 
     @Step("Сортировка пицц")
@@ -36,7 +46,7 @@ public class PizzaPage {
 
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                By.xpath(Constant.PRODUCT_LIST_XPATH)
+                By.xpath(PRODUCT_LIST_XPATH)
         ));
         return this;
     }
@@ -45,10 +55,10 @@ public class PizzaPage {
     public PizzaPage filterByPrice(int leftOffset, int rightOffset) {
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(Constant.PRICE_SLIDER_WRAPPER_XPATH)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(PRICE_SLIDER_WRAPPER_XPATH)));
 
-        WebElement leftHandle = driver.findElement(By.xpath(Constant.LEFT_PRICE_HANDLE_XPATH));
-        WebElement rightHandle = driver.findElement(By.xpath(Constant.RIGHT_PRICE_HANDLE_XPATH));
+        WebElement leftHandle = driver.findElement(By.xpath(LEFT_PRICE_HANDLE_XPATH));
+        WebElement rightHandle = driver.findElement(By.xpath(RIGHT_PRICE_HANDLE_XPATH));
 
         wait.until(ExpectedConditions.visibilityOf(leftHandle));
         wait.until(ExpectedConditions.visibilityOf(rightHandle));
@@ -60,18 +70,17 @@ public class PizzaPage {
         wait.until(ExpectedConditions.elementToBeClickable(filterButton)).click();
 
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(
-                By.xpath(Constant.PRODUCT_LIST_XPATH)
+                By.xpath(PRODUCT_LIST_XPATH)
         ));
         return this;
     }
-
 
     @Step("Получение списка цен на отображаемые пиццы")
     public List<Integer> getPizzaPrices() {
         return pizzaItems.stream().map(item -> Integer.parseInt(item.findElement(By.xpath(".//bdi")).getText().replaceAll("[^\\d]", "")) / 100).collect(Collectors.toList());
     }
 
-    @FindBy(xpath = Constant.BUTTON_IN_BASKET_XPATH)
+    @FindBy(xpath = BUTTON_IN_BASKET_XPATH)
     private WebElement buttonInBasket;
 
     @Step("Нажатие на кнопку \"В корзину\"")
@@ -80,7 +89,7 @@ public class PizzaPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.BUTTON_MORE_DETAILS_XPATH)
+    @FindBy(xpath = BUTTON_MORE_DETAILS_XPATH)
     private WebElement buttonMoreDetails;
 
     @Step("Нажатие на кнопку \"Подробнее\"")
@@ -91,7 +100,7 @@ public class PizzaPage {
         return this;
     }
 
-    @FindBy(xpath = Constant.ITEM_NAME_XPATH)
+    @FindBy(xpath = ITEM_NAME_XPATH)
     private WebElement itemName;
 
     @Step("Получение названия товара в корзине")
