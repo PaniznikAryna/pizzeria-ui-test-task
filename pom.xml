@@ -12,7 +12,16 @@
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <selenium.version>4.35.0</selenium.version>
+        <junit-bom.version>5.10.0</junit-bom.version>
+        <selenium-logger.version>2.4.0</selenium-logger.version>
+        <allure-junit5.version>2.24.0</allure-junit5.version>
+        <allure-java-commons.version>2.24.0</allure-java-commons.version>
+        <slf4j-simple.version>2.0.6</slf4j-simple.version>
+        <aspectjweaver.version>1.9.21</aspectjweaver.version>
+        <allure-maven.version>2.11.2</allure-maven.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
 
         <allure.results.directory>target/allure-results</allure.results.directory>
         <allure.report.directory>target/site/allure-maven-plugin</allure.report.directory>
@@ -23,7 +32,7 @@
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
-                <version>5.10.0</version>
+                <version>${junit-bom.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -51,14 +60,33 @@
         <dependency>
             <groupId>com.titusfortner</groupId>
             <artifactId>selenium-logger</artifactId>
-            <version>2.4.0</version>
+            <version>${selenium-logger.version}</version>
         </dependency>
 
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>2.24.0</version>
+            <version>${allure-junit5.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>${allure-java-commons.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j-simple.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectjweaver.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -66,13 +94,13 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.11.2</version>
+                <version>${allure-maven.version}</version>
             </plugin>
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <systemProperties>
                         <property>
@@ -80,8 +108,13 @@
                             <value>target/allure-results</value>
                         </property>
                     </systemProperties>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.21/aspectjweaver-1.9.21.jar"
+                    </argLine>
+
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 

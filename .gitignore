@@ -1,14 +1,12 @@
 target/
+log/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
 *.iws
+.idea/
 *.iml
 *.ipr
 
@@ -17,7 +15,7 @@ target/
 .classpath
 .factorypath
 .project
-.settings
+.settings/
 .springBeans
 .sts4-cache
 
@@ -30,6 +28,16 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+ajcore.*.txt
+
+allure-results/*
+!allure-results/.gitkeep
+
+allure-report/**
+!allure-report/.gitkeep
+
+
 
 ### VS Code ###
 .vscode/
